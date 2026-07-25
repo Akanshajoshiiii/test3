@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sentinel — Behavioral Anomaly SOC</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ============================== SIDEBAR ============================== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3.5v6c0 5-3.4 8.9-8 10.5-4.6-1.6-8-5.5-8-10.5v-6L12 2z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <span class="name">Sentinel</span>
+        <span class="tag">Behavioral SOC</span>
+      </div>
+    </div>
+
+    <div class="nav-group-label">Monitor</div>
+    <a class="nav-item" data-route="home" href="#home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l2-2 4 4 8-9 4 4"/></svg>
+      Home
+    </a>
+    <a class="nav-item" data-route="alerts" href="#alerts">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.86L1.8 18a1.8 1.8 0 0 0 1.55 2.7h17.3A1.8 1.8 0 0 0 22.2 18L13.7 3.86a1.8 1.8 0 0 0-3.4 0z"/></svg>
+      Alerts
+      <span class="badge" id="nav-alert-badge">–</span>
+    </a>
+    <a class="nav-item" data-route="entities" href="#entities">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 20c0-3.6 3-6.2 6.5-6.2s6.5 2.6 6.5 6.2"/><circle cx="17.5" cy="8.5" r="2.4"/><path d="M15.7 13.6c2.7.3 4.8 2.5 4.8 5.4"/></svg>
+      Entities
+    </a>
+    <a class="nav-item" data-route="map" href="#map">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 20l-6-3V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 4v13M15 7v13"/></svg>
+      Threat Map
+    </a>
+    <div class="nav-group-label">Insight</div>
+    <a class="nav-item" data-route="analytics" href="#analytics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      Analytics
+    </a>
+
+    <div class="sidebar-footer">
+      <div><span class="dot"></span>Pipeline <span id="sf-status" class="mono">online</span></div>
+      <div style="margin-top:4px;">Baseline: <span id="sf-baseline" class="mono">–</span></div>
+      <div style="margin-top:2px;">Classifier: <span id="sf-classifier" class="mono">–</span></div>
+    </div>
+  </aside>
+
+  <!-- ============================== MAIN ============================== -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="page-title">Security Overview</h1>
+        <div class="subtitle" id="page-subtitle">Real-time behavioral anomaly detection across users, service accounts &amp; edge devices</div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input id="global-search" placeholder="Search entity, IP, resource..." />
+        </div>
+        <div class="live-pill"><span class="pulse-dot"></span><span id="live-count">–</span> active threats</div>
+      </div>
+    </div>
+
+    <div id="page-root"><!-- pages injected here --></div>
+
+    <div class="footer-note">Sentinel · Synthetic behavioral SOC prototype · Reference implementation, not production threat intelligence</div>
+  </main>
+</div>
+
+<!-- Alert detail drawer -->
+<div id="drawer-root"></div>
+
+<script src="js/api.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/radar.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

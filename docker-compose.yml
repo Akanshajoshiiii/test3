@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  sentinel:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts:/app/artifacts   # persist generated dataset/models/sqlite feedback db
+    environment:
+      - PORT=8000

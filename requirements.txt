@@ -1,0 +1,14 @@
+# Core (required) — verified working in this build
+numpy
+pandas
+scikit-learn
+Flask
+
+# Optional upgrades — the code auto-detects and uses these if installed,
+# matching the original spec stack exactly. Without them, the pipeline
+# automatically falls back to the sklearn-based equivalents (see README
+# "Backend auto-selection" section) so the project runs anywhere offline.
+# torch              # enables the LSTM Sequence Autoencoder (Stage 1)
+# lightgbm           # enables LightGBM attack classifier (Stage 2)
+# shap               # enables true SHAP TreeExplainer attributions (requires lightgbm)
+# faker              # not required — generator.py is dependency-free by design
